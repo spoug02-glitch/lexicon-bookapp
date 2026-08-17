@@ -1,0 +1,176 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ---------- NextAuth(Auth.js) 표준 모델 ----------
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  displayName   String? // 사용자가 직접 설정한 닉네임. 없으면 name(구글 이름)을 대신 표시.
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+  reviews       Review[]
+  reviewLikes   ReviewLike[]
+  createdAt     DateTime  @default(now())
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// ---------- 도메인 모델 ----------
+
+// 알라딘 API 응답 캐시 겸 리뷰가 참조하는 정식 엔티티.
+// ISBN만 저장하지 않는 이유: Review 렌더링(책상세/마이페이지)마다 알라딘을
+// 재호출하면 N+1 문제 + 일 5,000회 쿼터 낭비가 발생하기 때문.
+model Book {
+  isbn13        String    @id
+  title         String
+  author        String?
+  publisher     String?
+  pubDate       DateTime?
+  coverUrl      String?
+  description   String?
+  priceSales    Int? // 알라딘 판매가(정가 아님, 참고용)
+  priceStandard Int? // 알라딘 정가
+  aladinItemId  String? // ItemOffStoreList 재조회용
+  cachedAt      DateTime  @updatedAt
+  isSeed        Boolean   @default(false) // true면 데모용 가상 도서(실제 알라딘 데이터 아님) — UI에 [예시] 안내 표시
+  reviews       Review[]
+}
+
+enum ReadingChannel {
+  PAPER
+  EBOOK
+  AUDIOBOOK
+}
+
+enum ReviewVisibility {
+  PUBLIC
+  PRIVATE
+}
+
+model Review {
+  id            String           @id @default(cuid())
+  userId        String
+  bookId        String
+  rating        Int? // 1~5, optional
+  shortReview   String? // 한줄평
+  body          String // 긴 리뷰. visibility가 PUBLIC이면 앱 레벨에서 필수(Zod refine)
+  finishedAt    DateTime
+  // 어떤 형태로 읽었는지(선택). null이면 미기재.
+  channel       ReadingChannel?
+  // 자유 서술: 어떻게/어디서 만났는지 발견 서사. 예: "2026년 어느 날 A 중고책방에서"
+  originStory   String?
+  visibility    ReviewVisibility @default(PUBLIC)
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
+
+  user  User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  book  Book         @relation(fields: [bookId], references: [isbn13], onDelete: Cascade)
+  likes ReviewLike[]
+  tags  ReviewTag[]
+
+  @@index([userId, channel])
+  @@index([bookId])
+}
+
+// 리뷰 좋아요. 사용자당 리뷰 1개에 최대 1개(중복 방지), 로그인 필수.
+model ReviewLike {
+  id        String   @id @default(cuid())
+  userId    String
+  reviewId  String
+  createdAt DateTime @default(now())
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  review Review @relation(fields: [reviewId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, reviewId])
+  @@index([reviewId])
+}
+
+// 자유 태그. 프리셋(#소장필요 #밑줄용 #영화나오면) + 사용자 자유입력 자동완성 학습.
+model Tag {
+  id         String      @id @default(cuid())
+  label      String      @unique
+  usageCount Int         @default(0)
+  reviews    ReviewTag[]
+}
+
+model ReviewTag {
+  id       String @id @default(cuid())
+  reviewId String
+  tagId    String
+
+  review Review @relation(fields: [reviewId], references: [id], onDelete: Cascade)
+  tag    Tag    @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@unique([reviewId, tagId])
+}
+
+// ---------- 외부 API 캐시/쿼터 ----------
+enum ApiProvider {
+  ALADIN_SEARCH
+  ALADIN_LOOKUP
+  ALADIN_USED
+  LIBRARY_HOLDINGS
+}
+
+model ApiCache {
+  id        String      @id @default(cuid())
+  provider  ApiProvider
+  cacheKey  String
+  payload   String // JSON.stringify 결과
+  fetchedAt DateTime    @default(now())
+  expiresAt DateTime
+
+  @@unique([provider, cacheKey])
+  @@index([expiresAt])
+}
+
+model ApiQuotaUsage {
+  id       String      @id @default(cuid())
+  provider ApiProvider
+  date     String // "YYYY-MM-DD" (KST 기준)
+  count    Int         @default(0)
+
+  @@unique([provider, date])
+}

@@ -1,0 +1,184 @@
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "primary-fixed-dim": "#b7c8de", "tertiary-container": "#272a2c", "on-surface": "#0d1c2f", "tertiary": "#121617", "primary-container": "#1a2b3c", "on-error": "#ffffff", "on-secondary-fixed-variant": "#38485d", "surface-dim": "#ccdbf4", "on-tertiary": "#ffffff", "error": "#ba1a1a", "on-primary-fixed-variant": "#38485a", "outline": "#74777d", "secondary-fixed-dim": "#b7c8e1", "on-error-container": "#93000a", "on-primary-fixed": "#0b1d2d", "surface-tint": "#4f6073", "surface-container": "#e6eeff", "on-secondary": "#ffffff", "on-surface-variant": "#44474c", "surface-container-high": "#dde9ff", "outline-variant": "#c4c6cd", "secondary-container": "#d0e1fb", "surface": "#f8f9ff", "primary": "#041627", "on-tertiary-fixed-variant": "#444749", "primary-fixed": "#d2e4fb", "secondary": "#505f76", "on-secondary-container": "#54647a", "inverse-primary": "#b7c8de", "on-background": "#0d1c2f", "on-primary-container": "#8192a7", "tertiary-fixed": "#e0e3e5", "surface-bright": "#f8f9ff", "error-container": "#ffdad6", "on-primary": "#ffffff", "surface-container-low": "#eff4ff", "on-secondary-fixed": "#0b1c30", "surface-variant": "#d5e3fd", "background": "#f8f9ff", "on-tertiary-fixed": "#191c1e", "secondary-fixed": "#d3e4fe", "tertiary-fixed-dim": "#c4c7c9", "inverse-surface": "#233144", "surface-container-highest": "#d5e3fd", "inverse-on-surface": "#ebf1ff", "on-tertiary-container": "#8e9193", "surface-container-lowest": "#ffffff" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "margin-mobile": "16px", "container-max": "1280px", "margin-desktop": "32px", "stack-lg": "24px", "stack-sm": "8px", "unit": "4px", "stack-md": "16px", "gutter": "16px" }, "fontFamily": { "headline-lg": ["Hanken Grotesk"], "headline-md": ["Hanken Grotesk"], "body-lg": ["Hanken Grotesk"], "display": ["Hanken Grotesk"], "title-lg": ["Hanken Grotesk"], "label-md": ["Hanken Grotesk"], "headline-lg-mobile": ["Hanken Grotesk"], "body-md": ["Hanken Grotesk"] }, "fontSize": { "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }], "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "display": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "title-lg": ["18px", { "lineHeight": "24px", "fontWeight": "600" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }], "headline-lg-mobile": ["24px", { "lineHeight": "30px", "fontWeight": "600" }], "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }] } } } };</script><style>@layer base { body { -webkit-tap-highlight-color: transparent; } .pt-safe { padding-top: env(safe-area-inset-top); } .pb-safe { padding-bottom: env(safe-area-inset-bottom); } } ::-webkit-scrollbar { display: none; }</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head><body class="bg-background font-body-md text-on-background"><header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] pt-safe"><div class="h-16 px-margin-mobile flex items-center gap-stack-md"><button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-variant/20 text-on-surface" onclick="history.back()"><span class="material-symbols-outlined">arrow_back</span></button><h1 class="font-title-lg text-title-lg text-primary">책 상세</h1></div></header><main class="flex flex-col relative w-full pt-16 bg-background min-h-screen"><div class="flex flex-col w-full pb-safe">
+<!-- Top Section: Book Info -->
+<div class="px-margin-mobile py-stack-lg bg-surface">
+<div class="flex flex-col md:flex-row gap-stack-lg md:gap-margin-desktop items-center md:items-start max-w-container-max mx-auto">
+<div class="w-40 md:w-56 shrink-0 relative shadow-md rounded overflow-hidden aspect-[2/3] bg-surface-container-high">
+<img alt="Book Cover" class="w-full h-full object-cover" data-alt="A clean, minimalist book cover featuring the title '[예시] 도서 제목 A' in modern typography on a neutral background, Swiss-minimalist influence, corporate modern style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0284aQIuFJo-G1vFPfF-2w8cUqAovDwOMXioAoTtLCVrq6-rWDJkcF7jZRGg_FiCT0YpGQSSEGPUS0PflVSDjMwUD17FxdwBdMhA30EvhCRW89jSm6OrTzStGgJKk_AxkhOMexQAPOWpQ6aTulEoX3yqQ_gC3FI-zJ-w-DanvUtCtdzTiRpFTpWYLIeYuNzGkY--C6150nEuU0jTuquq7rHSBbgqelBeCk_aEbRPjMx7hrWAMU9vk"/>
+</div>
+<div class="flex flex-col gap-stack-sm flex-1 text-center md:text-left pt-stack-sm">
+<div class="inline-block px-2 py-1 rounded bg-secondary-container text-on-secondary-container text-label-md w-fit mx-auto md:mx-0 font-medium tracking-wide">FICTION</div>
+<h2 class="text-headline-lg-mobile md:text-headline-lg font-headline-lg text-on-surface mt-unit leading-tight">[예시] 도서 제목 A</h2>
+<p class="text-title-lg font-title-lg text-on-surface-variant">김작가 지음</p>
+<div class="flex flex-wrap items-center justify-center md:justify-start gap-x-4 gap-y-2 mt-stack-sm text-body-md text-on-surface-variant">
+<span>출판사: 창비</span>
+<span>출간일: 2023.10.15</span>
+<span>ISBN: 9781234567890</span>
+</div>
+<div class="mt-stack-md flex gap-stack-sm justify-center md:justify-start w-full">
+<button class="flex-1 md:flex-none flex items-center justify-center gap-2 bg-primary text-on-primary px-6 py-3 rounded-full text-body-lg font-medium shadow-sm active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">bookmark</span>
+                읽고 싶어요
+            </button>
+<button class="w-12 h-12 flex items-center justify-center bg-surface-container rounded-full text-on-surface active:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[20px]">share</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Middle Section: Acquisition Comparison -->
+<div class="bg-surface-container-low py-stack-lg">
+<div class="max-w-container-max mx-auto px-margin-mobile">
+<h3 class="text-title-lg font-title-lg text-on-surface mb-stack-md">구할 수 있는 곳</h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-stack-md">
+<!-- Library Option -->
+<div class="bg-surface rounded-xl p-stack-md shadow-sm relative overflow-hidden group hover:shadow-md transition-shadow">
+<div class="flex items-start justify-between mb-stack-sm">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-[20px]">local_library</span>
+<span class="font-title-lg text-body-lg font-semibold">도서관</span>
+</div>
+<span class="px-2 py-1 bg-surface-container-highest text-on-surface text-label-md rounded-full font-medium">대출하기</span>
+</div>
+<div class="flex flex-col gap-1 mt-stack-md">
+<div class="flex justify-between items-end">
+<span class="text-headline-md font-headline-md text-on-surface">Available</span>
+</div>
+<p class="text-body-md text-on-surface-variant mt-2">Seoul Central Library</p>
+<p class="text-label-md text-on-surface-variant mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">distance</span> 2.4 km away
+                     </p>
+</div>
+</div>
+<!-- Retail Option -->
+<div class="bg-surface rounded-xl p-stack-md shadow-sm relative overflow-hidden group hover:shadow-md transition-shadow">
+<div class="flex items-start justify-between mb-stack-sm">
+<div class="flex items-center gap-2 text-on-surface">
+<span class="material-symbols-outlined text-[20px]">storefront</span>
+<span class="font-title-lg text-body-lg font-semibold">서점</span>
+</div>
+<span class="px-2 py-1 bg-surface-container text-on-surface text-label-md rounded-full font-medium">신품</span>
+</div>
+<div class="flex flex-col gap-1 mt-stack-md">
+<div class="flex justify-between items-end">
+<span class="text-headline-md font-headline-md text-on-surface">₩16,500</span>
+</div>
+<p class="text-body-md text-on-surface-variant mt-2">Kyobo Bookstore</p>
+<div class="flex gap-2 mt-2">
+<span class="px-2 py-0.5 bg-surface-variant text-on-surface text-label-md rounded">E-book: ₩11,500</span>
+</div>
+</div>
+</div>
+<!-- Second-hand Option -->
+<div class="bg-surface rounded-xl p-stack-md shadow-sm relative overflow-hidden group hover:shadow-md transition-shadow">
+<div class="flex items-start justify-between mb-stack-sm">
+<div class="flex items-center gap-2 text-secondary">
+<span class="material-symbols-outlined text-[20px]">recycling</span>
+<span class="font-title-lg text-body-lg font-semibold">중고</span>
+</div>
+<span class="px-2 py-1 bg-secondary-container text-on-secondary-container text-label-md rounded-full font-medium">중고</span>
+</div>
+<div class="flex flex-col gap-1 mt-stack-md">
+<div class="flex justify-between items-end">
+<span class="text-headline-md font-headline-md text-on-surface">From ₩8,000</span>
+</div>
+<p class="text-body-md text-on-surface-variant mt-2">Aladin Used Books</p>
+<p class="text-label-md text-on-surface-variant mt-1">3 copies available (Very Good)</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Section: Review List -->
+<div class="max-w-container-max mx-auto px-margin-mobile py-stack-lg w-full">
+<div class="flex justify-between items-center mb-stack-md">
+<h3 class="text-title-lg font-title-lg text-on-surface">커뮤니티 리뷰</h3>
+<button class="text-primary font-medium text-body-md flex items-center gap-1 hover:underline">
+            리뷰 작성 <span class="material-symbols-outlined text-[16px]">edit</span>
+</button>
+</div>
+<div class="flex flex-col gap-stack-md">
+<!-- Review Card 1 -->
+<div class="bg-surface p-stack-md rounded-xl shadow-sm">
+<div class="flex justify-between items-start mb-stack-sm">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-body-md">U1</div>
+<div>
+<div class="font-medium text-on-surface text-body-md">Reader_123</div>
+<div class="flex text-primary">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star_half</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-end gap-1">
+<span class="text-label-md text-on-surface-variant">[예시] 2023-10-27</span>
+<span class="px-2 py-0.5 rounded-full bg-tertiary-container/10 text-on-surface text-label-md font-medium">도서관</span>
+</div>
+</div>
+<p class="text-body-md text-on-surface-variant leading-relaxed line-clamp-3">
+                문체가 매우 간결하면서도 깊은 울림을 줍니다. 도서관에서 우연히 발견해서 읽었는데, 올해 읽은 책 중 단연 최고입니다. 특히 중반부의 전개는 전혀 예상하지 못했어요. 추천합니다.
+            </p>
+</div>
+<!-- Review Card 2 -->
+<div class="bg-surface p-stack-md rounded-xl shadow-sm">
+<div class="flex justify-between items-start mb-stack-sm">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center font-bold text-body-md">U2</div>
+<div>
+<div class="font-medium text-on-surface text-body-md">BookWorm99</div>
+<div class="flex text-primary">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]">star</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-end gap-1">
+<span class="text-label-md text-on-surface-variant">[예시] 2023-10-25</span>
+<span class="px-2 py-0.5 rounded-full bg-primary-container/10 text-on-surface text-label-md font-medium">온라인 · 알라딘</span>
+</div>
+</div>
+<p class="text-body-md text-on-surface-variant leading-relaxed line-clamp-3">
+                소장 가치가 충분한 책입니다. 전자책으로 먼저 읽고 너무 좋아서 종이책으로 다시 구매했어요. 번역도 매끄럽고 만듦새도 훌륭합니다.
+            </p>
+</div>
+<!-- Review Card 3 -->
+<div class="bg-surface p-stack-md rounded-xl shadow-sm">
+<div class="flex justify-between items-start mb-stack-sm">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface flex items-center justify-center font-bold text-body-md">U3</div>
+<div>
+<div class="font-medium text-on-surface text-body-md">NovelLover</div>
+<div class="flex text-primary">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]">star</span>
+<span class="material-symbols-outlined text-[16px]">star</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-end gap-1">
+<span class="text-label-md text-on-surface-variant">[예시] 2023-10-20</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container/20 text-on-surface text-label-md font-medium">구독 · 밀리의 서재</span>
+</div>
+</div>
+<p class="text-body-md text-on-surface-variant leading-relaxed line-clamp-3">
+                밀리의 서재에서 읽었습니다. 가볍게 읽기 좋은 내용이었어요. 후반부 결말이 조금 아쉽지만 전반적으로 흥미로운 주제를 다루고 있습니다.
+            </p>
+</div>
+</div>
+</div>
+</div></main></body></html>

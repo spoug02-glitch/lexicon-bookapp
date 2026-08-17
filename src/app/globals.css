@@ -1,0 +1,144 @@
+@import "tailwindcss";
+@import "material-symbols/outlined.css";
+
+/*
+ * 디자인 토큰 출처: stitch_bookconnect 폴더의 각 code.html 인라인 tailwind.config
+ * (lexicon_archival/DESIGN.md와 borderRadius 값이 미세하게 다름 — code.html을
+ * source of truth로 삼고, DESIGN.md의 --radius-md만 보강 차용함)
+ */
+@theme {
+  /* Colors */
+  --color-primary-fixed-dim: #b7c8de;
+  --color-tertiary-container: #272a2c;
+  --color-on-surface: #0d1c2f;
+  --color-tertiary: #121617;
+  --color-primary-container: #1a2b3c;
+  --color-on-error: #ffffff;
+  --color-on-secondary-fixed-variant: #38485d;
+  --color-surface-dim: #ccdbf4;
+  --color-on-tertiary: #ffffff;
+  --color-error: #ba1a1a;
+  --color-on-primary-fixed-variant: #38485a;
+  --color-outline: #74777d;
+  --color-secondary-fixed-dim: #b7c8e1;
+  --color-on-error-container: #93000a;
+  --color-on-primary-fixed: #0b1d2d;
+  --color-surface-tint: #4f6073;
+  --color-surface-container: #e6eeff;
+  --color-on-secondary: #ffffff;
+  --color-on-surface-variant: #44474c;
+  --color-surface-container-high: #dde9ff;
+  --color-outline-variant: #c4c6cd;
+  --color-secondary-container: #d0e1fb;
+  --color-surface: #f8f9ff;
+  --color-primary: #041627;
+  --color-on-tertiary-fixed-variant: #444749;
+  --color-primary-fixed: #d2e4fb;
+  --color-secondary: #505f76;
+  --color-on-secondary-container: #54647a;
+  --color-inverse-primary: #b7c8de;
+  --color-on-background: #0d1c2f;
+  --color-on-primary-container: #8192a7;
+  --color-tertiary-fixed: #e0e3e5;
+  --color-surface-bright: #f8f9ff;
+  --color-error-container: #ffdad6;
+  --color-on-primary: #ffffff;
+  --color-surface-container-low: #eff4ff;
+  --color-on-secondary-fixed: #0b1c30;
+  --color-surface-variant: #d5e3fd;
+  --color-background: #f8f9ff;
+  --color-on-tertiary-fixed: #191c1e;
+  --color-secondary-fixed: #d3e4fe;
+  --color-tertiary-fixed-dim: #c4c7c9;
+  --color-inverse-surface: #233144;
+  --color-surface-container-highest: #d5e3fd;
+  --color-inverse-on-surface: #ebf1ff;
+  --color-on-tertiary-container: #8e9193;
+  --color-surface-container-lowest: #ffffff;
+
+  /* Border radius */
+  --radius-DEFAULT: 0.125rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.25rem;
+  --radius-xl: 0.5rem;
+  --radius-full: 0.75rem;
+
+  /* Spacing (arbitrary keys used as px-margin-mobile, gap-stack-sm, ...) */
+  --spacing-margin-mobile: 16px;
+  --spacing-container-max: 1280px;
+  --spacing-margin-desktop: 32px;
+  --spacing-stack-lg: 24px;
+  --spacing-stack-sm: 8px;
+  --spacing-unit: 4px;
+  --spacing-stack-md: 16px;
+  --spacing-gutter: 16px;
+
+  /* Font family (모두 동일한 Hanken Grotesk를 가리키던 시맨틱 키를 그대로 이식 —
+     스티치 목업 클래스명(font-title-lg 등)과 1:1 호환을 위해 중복을 허용함) */
+  --font-headline-lg: var(--font-hanken);
+  --font-headline-md: var(--font-hanken);
+  --font-body-lg: var(--font-hanken);
+  --font-display: var(--font-hanken);
+  --font-title-lg: var(--font-hanken);
+  --font-label-md: var(--font-hanken);
+  --font-headline-lg-mobile: var(--font-hanken);
+  --font-body-md: var(--font-hanken);
+  --font-sans: var(--font-hanken);
+
+  /* Font size scale (size + line-height + letter-spacing + weight) */
+  --text-headline-lg: 32px;
+  --text-headline-lg--line-height: 40px;
+  --text-headline-lg--letter-spacing: -0.01em;
+  --text-headline-lg--font-weight: 600;
+
+  --text-headline-md: 24px;
+  --text-headline-md--line-height: 32px;
+  --text-headline-md--font-weight: 600;
+
+  --text-body-lg: 16px;
+  --text-body-lg--line-height: 24px;
+  --text-body-lg--font-weight: 400;
+
+  --text-display: 48px;
+  --text-display--line-height: 56px;
+  --text-display--letter-spacing: -0.02em;
+  --text-display--font-weight: 700;
+
+  --text-title-lg: 18px;
+  --text-title-lg--line-height: 24px;
+  --text-title-lg--font-weight: 600;
+
+  --text-label-md: 12px;
+  --text-label-md--line-height: 16px;
+  --text-label-md--letter-spacing: 0.02em;
+  --text-label-md--font-weight: 500;
+
+  --text-headline-lg-mobile: 24px;
+  --text-headline-lg-mobile--line-height: 30px;
+  --text-headline-lg-mobile--font-weight: 600;
+
+  --text-body-md: 14px;
+  --text-body-md--line-height: 20px;
+  --text-body-md--font-weight: 400;
+}
+
+@layer base {
+  body {
+    -webkit-tap-highlight-color: transparent;
+    overscroll-behavior-y: contain;
+  }
+  .pt-safe {
+    padding-top: env(safe-area-inset-top);
+  }
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  min-height: max(884px, 100dvh);
+}

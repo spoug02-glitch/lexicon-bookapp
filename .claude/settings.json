@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm -v)",
+      "Bash(npx --yes create-next-app@latest . --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --use-npm --no-turbopack)",
+      "Bash(rm -rf .lexicon-scaffold-tmp)",
+      "Bash(npx --yes create-next-app@latest .lexicon-scaffold-tmp --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --use-npm --no-turbopack)",
+      "Bash(rm -rf lexicon-scaffold-tmp)",
+      "Bash(npx --yes create-next-app@latest lexicon-scaffold-tmp --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --use-npm --no-turbopack)",
+      "Bash(rm -rf \"C:/Users/notebook/Desktop/Apps/lexicon-scaffold-tmp\")",
+      "Bash(sed -i 's/\"name\": \"lexicon-scaffold-tmp\"/\"name\": \"lexicon-bookapp\"/' package.json)",
+      "Bash(node -e \"console.log\\(require\\('crypto'\\).randomBytes\\(32\\).toString\\('base64'\\)\\)\")",
+      "Bash(git check-ignore *)"
+    ]
+  }
+}
