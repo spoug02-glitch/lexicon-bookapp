@@ -11,6 +11,7 @@ const base = {
   originStory: null,
   visibility: "PUBLIC" as const,
   tags: [] as string[],
+  excerpts: [] as { id: string; quote: string; pageLabel: string | null; comment: string | null }[],
 };
 
 describe("createReviewSchema", () => {
@@ -92,5 +93,46 @@ describe("createReviewSchema", () => {
   it("finishedAt이 형식은 맞지만 존재하지 않는 날짜면 무효하다", () => {
     const result = createReviewSchema.safeParse({ ...base, finishedAt: "2026-13-40" });
     expect(result.success).toBe(false);
+  });
+
+  it("excerpts를 채워도 유효하다", () => {
+    const result = createReviewSchema.safeParse({
+      ...base,
+      excerpts: [
+        { id: "tmp-1", quote: "인상 깊은 문장", pageLabel: "p.12", comment: "좋았다" },
+        { id: "tmp-2", quote: "또 다른 문장", pageLabel: null, comment: null },
+      ],
+    });
+    expect(result.success).toBe(true);
+  });
+
+  it("excerpt의 quote가 빈 문자열이면 무효하다", () => {
+    const result = createReviewSchema.safeParse({
+      ...base,
+      excerpts: [{ id: "tmp-1", quote: "", pageLabel: null, comment: null }],
+    });
+    expect(result.success).toBe(false);
+  });
+
+  it("excerpts가 20개를 초과하면 무효하다", () => {
+    const result = createReviewSchema.safeParse({
+      ...base,
+      excerpts: Array.from({ length: 21 }, (_, i) => ({
+        id: `tmp-${i}`,
+        quote: `문장 ${i}`,
+        pageLabel: null,
+        comment: null,
+      })),
+    });
+    expect(result.success).toBe(false);
+  });
+
+  it("excerpts를 생략하면 빈 배열이 기본값이다", () => {
+    const { excerpts: _omit, ...withoutExcerpts } = base;
+    const result = createReviewSchema.safeParse(withoutExcerpts);
+    expect(result.success).toBe(true);
+    if (result.success) {
+      expect(result.data.excerpts).toEqual([]);
+    }
   });
 });
