@@ -46,6 +46,11 @@ yarn-error.log*
 /aladin.txt
 /API/
 
+# internal planning/dev docs (session-scoped working notes, not project docs)
+/dev/
+/docs/superpowers/
+/.playwright-mcp/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
