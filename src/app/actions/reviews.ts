@@ -22,6 +22,43 @@ async function syncReviewTags(reviewId: string, labels: string[]) {
   }
 }
 
+// Excerpt는 태그와 달리 안정적인 id를 유지한다(향후 발췌 단위 좋아요/공유추적 확장 대비).
+// 클라이언트가 보낸 id 중 기존 DB에 있으면 update, 없어졌으면 delete, 새 id면 create.
+async function syncReviewExcerpts(reviewId: string, excerpts: CreateReviewInput["excerpts"]) {
+  const existing = await prisma.excerpt.findMany({ where: { reviewId }, select: { id: true } });
+  const existingIds = new Set(existing.map((e) => e.id));
+  const incomingIds = new Set(excerpts.map((e) => e.id));
+
+  const idsToDelete = [...existingIds].filter((id) => !incomingIds.has(id));
+  if (idsToDelete.length > 0) {
+    await prisma.excerpt.deleteMany({ where: { id: { in: idsToDelete } } });
+  }
+
+  for (const [order, excerpt] of excerpts.entries()) {
+    if (existingIds.has(excerpt.id)) {
+      await prisma.excerpt.update({
+        where: { id: excerpt.id },
+        data: {
+          quote: excerpt.quote,
+          pageLabel: excerpt.pageLabel,
+          comment: excerpt.comment,
+          order,
+        },
+      });
+    } else {
+      await prisma.excerpt.create({
+        data: {
+          reviewId,
+          quote: excerpt.quote,
+          pageLabel: excerpt.pageLabel,
+          comment: excerpt.comment,
+          order,
+        },
+      });
+    }
+  }
+}
+
 export async function createReview(input: CreateReviewInput) {
   const userId = await requireUserId();
   const parsed = createReviewSchema.parse(input);
@@ -48,6 +85,7 @@ export async function createReview(input: CreateReviewInput) {
   });
 
   await syncReviewTags(review.id, parsed.tags);
+  await syncReviewExcerpts(review.id, parsed.excerpts);
 
   revalidatePath(`/books/${parsed.bookIsbn13}`);
   revalidatePath("/history");
@@ -78,6 +116,7 @@ export async function updateReview(reviewId: string, input: CreateReviewInput) {
   });
 
   await syncReviewTags(review.id, parsed.tags);
+  await syncReviewExcerpts(review.id, parsed.excerpts);
 
   revalidatePath(`/books/${parsed.bookIsbn13}`);
   revalidatePath("/history");
