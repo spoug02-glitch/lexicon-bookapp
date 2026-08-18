@@ -8,9 +8,12 @@ interface ShareButtonProps {
 
 export function ShareButton({ reviewId }: ShareButtonProps) {
   const [copied, setCopied] = useState(false);
+  const [copyFailed, setCopyFailed] = useState(false);
   const [supportsNativeShare, setSupportsNativeShare] = useState(false);
 
   useEffect(() => {
+    // 서버-클라이언트 hydration mismatch를 피하기 위해 클라이언트에서만 감지한다.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setSupportsNativeShare(typeof navigator !== "undefined" && "share" in navigator);
   }, []);
 
@@ -20,9 +23,17 @@ export function ShareButton({ reviewId }: ShareButtonProps) {
   }
 
   async function handleCopy() {
-    await navigator.clipboard.writeText(shareUrl());
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    try {
+      if (!navigator.clipboard) {
+        throw new Error("clipboard API unavailable");
+      }
+      await navigator.clipboard.writeText(shareUrl());
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      setCopyFailed(true);
+      setTimeout(() => setCopyFailed(false), 2000);
+    }
   }
 
   async function handleNativeShare() {
@@ -59,6 +70,7 @@ export function ShareButton({ reviewId }: ShareButtonProps) {
         </button>
       )}
       {copied && <span className="text-label-md text-primary">링크가 복사되었습니다.</span>}
+      {copyFailed && <span className="text-label-md text-error">링크 복사에 실패했습니다.</span>}
     </div>
   );
 }

@@ -64,7 +64,10 @@ export function ExcerptBlockList({ value, onChange }: ExcerptBlockListProps) {
 
     const [first, ...rest] = paragraphs;
     const updatedFirst = { ...value[index], quote: first };
-    const newBlocks = rest.map((quote) => ({ ...createEmptyBlock(), quote }));
+    const slotsAvailable = Math.max(0, MAX_EXCERPTS - value.length);
+    const newBlocks = rest
+      .slice(0, slotsAvailable)
+      .map((quote) => ({ ...createEmptyBlock(), quote }));
     onChange([...value.slice(0, index), updatedFirst, ...newBlocks, ...value.slice(index + 1)]);
   }
 
@@ -133,6 +136,7 @@ export function ExcerptBlockList({ value, onChange }: ExcerptBlockListProps) {
             <textarea
               className="w-full bg-[#F1F5F9] text-on-surface p-3 rounded-lg text-body-md focus:outline-none focus:ring-1 focus:ring-primary focus:bg-surface transition-all resize-none placeholder:text-on-surface-variant/50"
               placeholder="인용할 문장을 입력하세요"
+              maxLength={1000}
               rows={2}
               value={block.quote}
               onChange={(e) => updateBlock(block.id, { quote: e.target.value })}

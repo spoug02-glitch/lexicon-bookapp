@@ -62,7 +62,15 @@ function TagRow({ tags }: { tags: string[] }) {
   );
 }
 
-function ExcerptPreview({ reviewId, excerpts }: { reviewId: string; excerpts: ReviewCardReview["excerpts"] }) {
+function ExcerptPreview({
+  reviewId,
+  excerpts,
+  visibility,
+}: {
+  reviewId: string;
+  excerpts: ReviewCardReview["excerpts"];
+  visibility: "PUBLIC" | "PRIVATE";
+}) {
   if (excerpts.length === 0) return null;
   const shown = excerpts.slice(0, 2);
   const remaining = excerpts.length - shown.length;
@@ -75,7 +83,7 @@ function ExcerptPreview({ reviewId, excerpts }: { reviewId: string; excerpts: Re
           {excerpt.pageLabel && <span className="not-italic text-label-md ml-1">({excerpt.pageLabel})</span>}
         </p>
       ))}
-      {remaining > 0 && (
+      {remaining > 0 && visibility === "PUBLIC" && (
         <Link
           href={`/share/${reviewId}`}
           className="text-label-md text-primary hover:underline self-start"
@@ -147,7 +155,7 @@ export function ReviewCard({
             &ldquo;{review.body}&rdquo;
           </p>
           <TagRow tags={review.tags} />
-          <ExcerptPreview reviewId={review.id} excerpts={review.excerpts} />
+          <ExcerptPreview reviewId={review.id} excerpts={review.excerpts} visibility={review.visibility} />
         </div>
       </div>
     );
@@ -199,7 +207,7 @@ export function ReviewCard({
         {review.body}
       </p>
       <TagRow tags={review.tags} />
-      <ExcerptPreview reviewId={review.id} excerpts={review.excerpts} />
+      <ExcerptPreview reviewId={review.id} excerpts={review.excerpts} visibility={review.visibility} />
       {likes && (
         <button
           type="button"

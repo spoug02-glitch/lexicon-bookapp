@@ -128,6 +128,7 @@ describe("createReviewSchema", () => {
   });
 
   it("excerpts를 생략하면 빈 배열이 기본값이다", () => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { excerpts: _omit, ...withoutExcerpts } = base;
     const result = createReviewSchema.safeParse(withoutExcerpts);
     expect(result.success).toBe(true);
