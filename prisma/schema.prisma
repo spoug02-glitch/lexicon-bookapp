@@ -108,6 +108,7 @@ model Review {
   book  Book         @relation(fields: [bookId], references: [isbn13], onDelete: Cascade)
   likes ReviewLike[]
   tags  ReviewTag[]
+  excerpts Excerpt[]
 
   @@index([userId, channel])
   @@index([bookId])
@@ -144,6 +145,22 @@ model ReviewTag {
   tag    Tag    @relation(fields: [tagId], references: [id], onDelete: Cascade)
 
   @@unique([reviewId, tagId])
+}
+
+// 문장 발췌. 노션 블록처럼 하나씩 쌓이며, id는 update/delete/create diff의 기준이 되므로
+// 재생성하지 않고 최대한 유지한다(향후 발췌 단위 좋아요·공유추적 확장을 고려).
+model Excerpt {
+  id        String   @id @default(cuid())
+  reviewId  String
+  quote     String
+  pageLabel String? // 자유 텍스트: "p.12-13", "35%", "위치 1200", "3장" 등
+  comment   String?
+  order     Int
+  createdAt DateTime @default(now())
+
+  review Review @relation(fields: [reviewId], references: [id], onDelete: Cascade)
+
+  @@index([reviewId, order])
 }
 
 // ---------- 외부 API 캐시/쿼터 ----------

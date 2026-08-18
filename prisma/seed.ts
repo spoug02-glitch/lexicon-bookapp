@@ -203,6 +203,53 @@ async function main() {
     }
   }
 
+  // 문장 발췌 데모 — 리뷰 재생성마다 중복되지 않도록 먼저 정리 후 채운다.
+  const excerptSeeds: {
+    reviewId: string;
+    quote: string;
+    pageLabel: string | null;
+    comment: string | null;
+  }[] = [
+    {
+      reviewId: "seed-review-a1",
+      quote: "[예시] 우리는 결국 스스로 만든 이야기 속에서 살아간다.",
+      pageLabel: "p.42",
+      comment: "이 문장에서 한참 멈춰 있었다",
+    },
+    {
+      reviewId: "seed-review-a1",
+      quote: "[예시] 기억은 사실이 아니라 해석이다.",
+      pageLabel: "p.118",
+      comment: null,
+    },
+    {
+      reviewId: "seed-review-main1",
+      quote: "[예시] 좋은 디자인은 스스로를 설명한다.",
+      pageLabel: "위치 850",
+      comment: null,
+    },
+  ];
+
+  const excerptIdsByReview = new Map<string, string[]>();
+  for (const seedExcerpt of excerptSeeds) {
+    const ids = excerptIdsByReview.get(seedExcerpt.reviewId) ?? [];
+    excerptIdsByReview.set(seedExcerpt.reviewId, ids);
+  }
+  for (const reviewId of excerptIdsByReview.keys()) {
+    await prisma.excerpt.deleteMany({ where: { reviewId } });
+  }
+  for (const [order, seedExcerpt] of excerptSeeds.entries()) {
+    await prisma.excerpt.create({
+      data: {
+        reviewId: seedExcerpt.reviewId,
+        quote: seedExcerpt.quote,
+        pageLabel: seedExcerpt.pageLabel,
+        comment: seedExcerpt.comment,
+        order,
+      },
+    });
+  }
+
   console.log("시드 데이터 생성 완료");
 }
 
