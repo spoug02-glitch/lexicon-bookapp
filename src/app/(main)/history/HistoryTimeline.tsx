@@ -16,6 +16,7 @@ interface HistoryReview {
   shortReview: string | null;
   originStory: string | null;
   tags: string[];
+  excerpts: { id: string; quote: string; pageLabel: string | null; comment: string | null }[];
   visibility: "PUBLIC" | "PRIVATE";
   book: { isbn13: string; title: string; author: string | null; coverUrl: string | null };
 }
@@ -75,6 +76,7 @@ export function HistoryTimeline({ reviews }: { reviews: HistoryReview[] }) {
                     context="my-history"
                     book={review.book}
                     showVisibilityBadge
+                    share
                     manage={{
                       onEdit: () =>
                         router.push(`/books/${review.book.isbn13}/review/${review.id}/edit`),

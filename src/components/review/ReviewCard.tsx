@@ -3,6 +3,7 @@ import type { ReadingChannel } from "@prisma/client";
 import { BookCover } from "@/components/book/BookCover";
 import { ChannelBadge } from "@/components/review/ChannelBadge";
 import { StarRating } from "@/components/review/StarRating";
+import { ShareButton } from "@/components/review/ShareButton";
 
 interface ReviewCardReview {
   id: string;
@@ -38,6 +39,7 @@ interface ReviewCardProps {
   likes?: LikeState;
   manage?: ManageActions;
   showVisibilityBadge?: boolean;
+  share?: boolean;
 }
 
 function formatDate(date: Date): string {
@@ -93,6 +95,7 @@ export function ReviewCard({
   likes,
   manage,
   showVisibilityBadge,
+  share,
 }: ReviewCardProps) {
   if (context === "my-history" && book) {
     return (
@@ -216,6 +219,7 @@ export function ReviewCard({
           좋아요 {likes.count}
         </button>
       )}
+      {share && review.visibility === "PUBLIC" && <ShareButton reviewId={review.id} />}
     </div>
   );
 }

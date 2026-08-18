@@ -16,6 +16,7 @@ export interface CommunityReview {
   shortReview: string | null;
   originStory: string | null;
   tags: string[];
+  excerpts: { id: string; quote: string; pageLabel: string | null; comment: string | null }[];
   visibility: "PUBLIC" | "PRIVATE";
   reviewerName: string | null;
   likeCount: number;
@@ -118,6 +119,7 @@ export function CommunityReviewList({
                   }
                 : undefined
             }
+            share
           />
         );
       })}

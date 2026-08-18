@@ -11,7 +11,11 @@ export default async function HistoryPage() {
     userId
       ? prisma.review.findMany({
           where: { userId },
-          include: { book: true, tags: { include: { tag: true } } },
+          include: {
+            book: true,
+            tags: { include: { tag: true } },
+            excerpts: { orderBy: { order: "asc" } },
+          },
           orderBy: { finishedAt: "desc" },
         })
       : Promise.resolve([]),
@@ -52,6 +56,12 @@ export default async function HistoryPage() {
             reviews={reviews.map((review) => ({
               ...review,
               tags: review.tags.map((rt) => rt.tag.label),
+              excerpts: review.excerpts.map((e) => ({
+                id: e.id,
+                quote: e.quote,
+                pageLabel: e.pageLabel,
+                comment: e.comment,
+              })),
             }))}
           />
         </div>

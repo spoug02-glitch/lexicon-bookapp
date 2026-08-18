@@ -24,6 +24,7 @@ export default async function BookDetailPage({ params }: BookDetailPageProps) {
     include: {
       user: true,
       tags: { include: { tag: true } },
+      excerpts: { orderBy: { order: "asc" } },
       _count: { select: { likes: true } },
       // 로그인 안 했으면 매칭될 수 없는 값으로 조회해 항상 같은 타입 형태를 유지한다.
       likes: { where: { userId: currentUserId ?? "__anonymous__" } },
@@ -46,6 +47,12 @@ export default async function BookDetailPage({ params }: BookDetailPageProps) {
       shortReview: r.shortReview,
       originStory: r.originStory,
       tags: r.tags.map((rt) => rt.tag.label),
+      excerpts: r.excerpts.map((e) => ({
+        id: e.id,
+        quote: e.quote,
+        pageLabel: e.pageLabel,
+        comment: e.comment,
+      })),
       visibility: r.visibility,
       reviewerName: r.user.displayName ?? r.user.name,
       likeCount: r._count.likes,
