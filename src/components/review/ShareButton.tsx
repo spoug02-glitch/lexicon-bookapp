@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface ShareButtonProps {
   reviewId: string;
@@ -8,6 +8,11 @@ interface ShareButtonProps {
 
 export function ShareButton({ reviewId }: ShareButtonProps) {
   const [copied, setCopied] = useState(false);
+  const [supportsNativeShare, setSupportsNativeShare] = useState(false);
+
+  useEffect(() => {
+    setSupportsNativeShare(typeof navigator !== "undefined" && "share" in navigator);
+  }, []);
 
   function shareUrl(): string {
     const origin = typeof window !== "undefined" ? window.location.origin : "";
@@ -28,8 +33,6 @@ export function ShareButton({ reviewId }: ShareButtonProps) {
       // 사용자가 공유 시트를 취소한 경우 등은 무시한다.
     }
   }
-
-  const supportsNativeShare = typeof navigator !== "undefined" && "share" in navigator;
 
   return (
     <div className="flex items-center gap-2">
