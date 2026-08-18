@@ -14,6 +14,7 @@ interface ReviewCardReview {
   originStory: string | null;
   tags: string[];
   visibility: "PUBLIC" | "PRIVATE";
+  excerpts: { id: string; quote: string; pageLabel: string | null; comment: string | null }[];
 }
 
 interface LikeState {
@@ -55,6 +56,31 @@ function TagRow({ tags }: { tags: string[] }) {
           {tag.startsWith("#") ? tag : `#${tag}`}
         </span>
       ))}
+    </div>
+  );
+}
+
+function ExcerptPreview({ reviewId, excerpts }: { reviewId: string; excerpts: ReviewCardReview["excerpts"] }) {
+  if (excerpts.length === 0) return null;
+  const shown = excerpts.slice(0, 2);
+  const remaining = excerpts.length - shown.length;
+
+  return (
+    <div className="flex flex-col gap-1 mt-2">
+      {shown.map((excerpt) => (
+        <p key={excerpt.id} className="text-body-md text-on-surface-variant italic border-l-2 border-outline-variant/40 pl-2">
+          &ldquo;<span>{excerpt.quote}</span>&rdquo;
+          {excerpt.pageLabel && <span className="not-italic text-label-md ml-1">({excerpt.pageLabel})</span>}
+        </p>
+      ))}
+      {remaining > 0 && (
+        <Link
+          href={`/share/${reviewId}`}
+          className="text-label-md text-primary hover:underline self-start"
+        >
+          발췌 {remaining}개 더보기
+        </Link>
+      )}
     </div>
   );
 }
@@ -118,6 +144,7 @@ export function ReviewCard({
             &ldquo;{review.body}&rdquo;
           </p>
           <TagRow tags={review.tags} />
+          <ExcerptPreview reviewId={review.id} excerpts={review.excerpts} />
         </div>
       </div>
     );
@@ -169,6 +196,7 @@ export function ReviewCard({
         {review.body}
       </p>
       <TagRow tags={review.tags} />
+      <ExcerptPreview reviewId={review.id} excerpts={review.excerpts} />
       {likes && (
         <button
           type="button"
