@@ -19,7 +19,11 @@ export default async function EditReviewPage({ params }: EditReviewPageProps) {
   const [review, presets] = await Promise.all([
     prisma.review.findUnique({
       where: { id: reviewId },
-      include: { book: true, tags: { include: { tag: true } } },
+      include: {
+        book: true,
+        tags: { include: { tag: true } },
+        excerpts: { orderBy: { order: "asc" } },
+      },
     }),
     getTagPresets(),
   ]);
@@ -50,6 +54,12 @@ export default async function EditReviewPage({ params }: EditReviewPageProps) {
             originStory: review.originStory,
             visibility: review.visibility,
             tags: review.tags.map((rt) => rt.tag.label),
+            excerpts: review.excerpts.map((e) => ({
+              id: e.id,
+              quote: e.quote,
+              pageLabel: e.pageLabel,
+              comment: e.comment,
+            })),
           }}
         />
       </main>

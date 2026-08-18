@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import type { ReadingChannel } from "@prisma/client";
+import type { ExcerptBlockValue } from "@/components/review/ExcerptBlockList";
 import { ReviewForm, type ReviewFormValues } from "@/components/review/ReviewForm";
 import { updateReview } from "@/app/actions/reviews";
 
@@ -18,6 +19,7 @@ interface EditReviewFormContainerProps {
     originStory: string | null;
     visibility: "PUBLIC" | "PRIVATE";
     tags: string[];
+    excerpts: ExcerptBlockValue[];
   };
 }
 
