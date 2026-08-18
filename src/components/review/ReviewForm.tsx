@@ -3,6 +3,7 @@
 import { useState, type FormEvent } from "react";
 import type { ReadingChannel } from "@prisma/client";
 import { ChannelSelector } from "@/components/review/ChannelSelector";
+import { ExcerptBlockList, type ExcerptBlockValue } from "@/components/review/ExcerptBlockList";
 import { TagSelector } from "@/components/review/TagSelector";
 import { VisibilityToggle } from "@/components/review/VisibilityToggle";
 import { StarRating } from "@/components/review/StarRating";
@@ -18,6 +19,7 @@ export interface ReviewFormValues {
   originStory: string | null;
   visibility: "PUBLIC" | "PRIVATE";
   tags: string[];
+  excerpts: ExcerptBlockValue[];
 }
 
 interface ReviewFormProps {
@@ -49,6 +51,7 @@ export function ReviewForm({
     initialValues?.visibility ?? "PUBLIC",
   );
   const [tags, setTags] = useState<string[]>(initialValues?.tags ?? []);
+  const [excerpts, setExcerpts] = useState<ExcerptBlockValue[]>(initialValues?.excerpts ?? []);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -71,6 +74,9 @@ export function ReviewForm({
         originStory: originStory.trim().length > 0 ? originStory.trim() : null,
         visibility,
         tags,
+        excerpts: excerpts
+          .filter((block) => block.quote.trim().length > 0)
+          .map((block) => ({ ...block, quote: block.quote.trim() })),
       });
     } catch (err) {
       setError(err instanceof Error ? err.message : "저장 중 오류가 발생했습니다.");
@@ -92,6 +98,8 @@ export function ReviewForm({
       </div>
 
       <ChannelSelector value={channel} onChange={setChannel} />
+
+      <ExcerptBlockList value={excerpts} onChange={setExcerpts} />
 
       <div className="flex flex-col gap-stack-sm w-full">
         <div className="flex items-center justify-between">
@@ -152,6 +160,11 @@ export function ReviewForm({
       <TagSelector value={tags} onChange={setTags} presets={presets} />
 
       <VisibilityToggle value={visibility} onChange={setVisibility} />
+      {visibility === "PUBLIC" && excerpts.length > 0 && (
+        <p className="text-label-md text-on-surface-variant">
+          발췌 {excerpts.length}개도 함께 공개됩니다.
+        </p>
+      )}
 
       <div className="flex flex-col gap-stack-sm w-full">
         <label className="text-label-md text-on-surface-variant uppercase tracking-wider font-semibold">
@@ -184,7 +197,9 @@ export function ReviewForm({
           disabled={!canSubmit}
           className="w-full bg-primary text-on-primary font-title-lg py-4 rounded-xl flex items-center justify-center gap-2 hover:bg-primary/90 active:scale-[0.98] transition-all shadow-md shadow-primary/20 disabled:opacity-50 disabled:pointer-events-none"
         >
-          <span className="material-symbols-outlined text-[20px]">check</span>
+          <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
+            check
+          </span>
           {submitting ? "저장 중..." : submitLabel}
         </button>
       </div>
