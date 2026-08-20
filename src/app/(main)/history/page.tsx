@@ -25,7 +25,7 @@ export default async function HistoryPage() {
   return (
     <>
       <Header title="나의 독서 기록" />
-      <main className="flex flex-col relative w-full pt-16 pb-24 px-margin-mobile bg-background min-h-screen">
+      <main className="flex flex-col relative w-full pt-header-safe pb-24 px-margin-mobile bg-background min-h-screen">
         <div className="flex flex-col w-full gap-stack-lg pb-margin-mobile">
           <div className="flex items-center gap-stack-md px-unit pt-unit">
             <div className="relative w-16 h-16 rounded-full shadow-md overflow-hidden shrink-0 border-2 border-surface-container-lowest bg-surface-container-high flex items-center justify-center">

@@ -16,9 +16,9 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
   return (
     <>
       <Header title="검색" />
-      <main className="flex flex-col relative w-full pt-16 pb-24 px-margin-mobile bg-background min-h-screen">
+      <main className="flex flex-col relative w-full pt-header-safe pb-24 px-margin-mobile bg-background min-h-screen">
         <div className="flex flex-col w-full gap-stack-lg">
-          <div className="sticky top-16 z-40 bg-surface/95 backdrop-blur pt-stack-sm pb-stack-md -mx-margin-mobile px-margin-mobile">
+          <div className="sticky top-header-safe z-40 bg-surface/95 backdrop-blur pt-stack-sm pb-stack-md -mx-margin-mobile px-margin-mobile">
             <SearchBar defaultValue={query} />
           </div>
 

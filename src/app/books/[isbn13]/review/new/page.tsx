@@ -20,7 +20,7 @@ export default async function NewReviewForBookPage({ params }: NewReviewForBookP
   return (
     <>
       <Header title="리뷰 작성" variant="back" backHref={`/books/${isbn13}`} />
-      <main className="flex flex-col relative w-full pt-16 bg-background min-h-screen p-margin-mobile">
+      <main className="flex flex-col relative w-full pt-header-safe bg-background min-h-screen p-margin-mobile">
         <ReviewFormContainer
           book={{
             isbn13: book.isbn13,

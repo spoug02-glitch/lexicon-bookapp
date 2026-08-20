@@ -64,7 +64,7 @@ export default async function BookDetailPage({ params }: BookDetailPageProps) {
       return (
         <>
           <Header title="책 상세" variant="back" />
-          <main className="flex flex-col relative w-full pt-16 px-margin-mobile bg-background min-h-screen">
+          <main className="flex flex-col relative w-full pt-header-safe px-margin-mobile bg-background min-h-screen">
             <QuotaBanner provider="aladin" />
           </main>
         </>
@@ -76,7 +76,7 @@ export default async function BookDetailPage({ params }: BookDetailPageProps) {
   return (
     <>
       <Header title="책 상세" variant="back" />
-      <main className="flex flex-col relative w-full pt-16 pb-24 bg-background min-h-screen">
+      <main className="flex flex-col relative w-full pt-header-safe pb-24 bg-background min-h-screen">
         <div className="flex flex-col w-full pb-safe">
           {/* 책 기본 정보 */}
           <div className="px-margin-mobile py-stack-lg bg-surface">

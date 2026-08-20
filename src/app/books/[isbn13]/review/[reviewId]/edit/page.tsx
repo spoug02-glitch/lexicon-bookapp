@@ -35,7 +35,7 @@ export default async function EditReviewPage({ params }: EditReviewPageProps) {
   return (
     <>
       <Header title="리뷰 수정" variant="back" backHref={`/books/${isbn13}`} />
-      <main className="flex flex-col relative w-full pt-16 bg-background min-h-screen p-margin-mobile">
+      <main className="flex flex-col relative w-full pt-header-safe bg-background min-h-screen p-margin-mobile">
         <EditReviewFormContainer
           reviewId={review.id}
           book={{

@@ -137,6 +137,14 @@
   .pb-safe {
     padding-bottom: env(safe-area-inset-bottom);
   }
+  /* Header/BottomNav는 고정 높이(4rem)에 pt-safe/pb-safe로 안전 영역을 더해 실제 높이가
+     기기마다 달라진다 — 본문/스티키 요소가 그 높이만큼 오프셋을 잡아야 겹치지 않는다. */
+  .pt-header-safe {
+    padding-top: calc(4rem + env(safe-area-inset-top));
+  }
+  .top-header-safe {
+    top: calc(4rem + env(safe-area-inset-top));
+  }
 }
 
 ::-webkit-scrollbar {

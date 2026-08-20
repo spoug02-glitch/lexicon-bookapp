@@ -15,7 +15,7 @@ export default async function SettingsPage() {
   return (
     <>
       <Header title="설정" />
-      <main className="flex flex-col relative w-full pt-16 pb-24 px-margin-mobile bg-background min-h-screen items-center justify-center gap-stack-md">
+      <main className="flex flex-col relative w-full pt-header-safe pb-24 px-margin-mobile bg-background min-h-screen items-center justify-center gap-stack-md">
         {session?.user && user ? (
           <>
             <NicknameSection
