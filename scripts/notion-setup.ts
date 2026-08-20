@@ -23,7 +23,7 @@ async function main() {
 
   const database = await notion.databases.create({
     parent: { type: "page_id", page_id: parentPageId },
-    title: [{ type: "text", text: { content: "Lexicon 독서 리뷰" } }],
+    title: [{ type: "text", text: { content: "책결 독서 리뷰" } }],
   });
 
   const dataSource = await notion.dataSources.create({

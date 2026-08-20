@@ -77,7 +77,7 @@ export interface ExportSummary {
   updated: number;
 }
 
-// 사용자의 리뷰 전체를 Notion 데이터베이스에 반영한다. LexiconReviewId로 기존 페이지를
+// 사용자의 리뷰 전체를 Notion 데이터베이스에 반영한다. ChaekgyeolReviewId로 기존 페이지를
 // 찾아 있으면 업데이트, 없으면 새로 만든다(반복 실행해도 중복 생성되지 않음).
 export async function exportReviewsToNotion(userId: string): Promise<ExportSummary> {
   const notion = getClient();
@@ -148,7 +148,7 @@ export interface ImportSummary {
 }
 
 // Notion 데이터베이스의 행을 읽어와 아직 없는 리뷰만 새로 만든다.
-// LexiconReviewId가 있는 행(=우리가 내보낸 행)은 건드리지 않고, 사용자가 Notion에서
+// ChaekgyeolReviewId가 있는 행(=우리가 내보낸 행)은 건드리지 않고, 사용자가 Notion에서
 // 직접 추가한 행(ISBN13 필수)만 새 리뷰로 들여온다.
 export async function importReviewsFromNotion(userId: string): Promise<ImportSummary> {
   const notion = getClient();

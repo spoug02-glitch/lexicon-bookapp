@@ -64,10 +64,10 @@ async function main() {
   // 데모 사용자 4명: 실제 Google 로그인 계정과 무관한 시드 전용 사용자.
   // "이서연"은 마이페이지 데모, "독서가A/B/C"는 책 상세 커뮤니티 리뷰 데모용.
   const users = [
-    { id: "seed-user-main", name: "[예시] 이서연", email: "seed-main@lexicon.example" },
-    { id: "seed-user-a", name: "[예시] 독서가A", email: "seed-a@lexicon.example" },
-    { id: "seed-user-b", name: "[예시] 독서가B", email: "seed-b@lexicon.example" },
-    { id: "seed-user-c", name: "[예시] 독서가C", email: "seed-c@lexicon.example" },
+    { id: "seed-user-main", name: "[예시] 이서연", email: "seed-main@chaekgyeol.example" },
+    { id: "seed-user-a", name: "[예시] 독서가A", email: "seed-a@chaekgyeol.example" },
+    { id: "seed-user-b", name: "[예시] 독서가B", email: "seed-b@chaekgyeol.example" },
+    { id: "seed-user-c", name: "[예시] 독서가C", email: "seed-c@chaekgyeol.example" },
   ];
 
   for (const user of users) {

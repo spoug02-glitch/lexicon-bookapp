@@ -15,7 +15,7 @@ export const NOTION_PROPERTIES = {
   visibility: "공개여부",
   tags: "태그",
   // 내보낸 리뷰와 다시 매칭하기 위한 내부 동기화 키. 사용자가 직접 수정하지 않아야 함.
-  reviewId: "LexiconReviewId",
+  reviewId: "ChaekgyeolReviewId",
 } as const;
 
 export const CHANNEL_LABELS: Record<ReadingChannel, string> = {
