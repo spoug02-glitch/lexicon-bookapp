@@ -10,7 +10,7 @@ export default function ArchivePage() {
             construction
           </span>
           <p className="text-body-md text-on-surface-variant">
-            아카이브 기능은 준비 중입니다. [예시 안내 문구]
+            아카이브 기능은 준비 중입니다.
           </p>
         </div>
       </main>

@@ -169,12 +169,15 @@ export function ReviewCard({
             </p>
           )}
           {review.originStory && (
-            <p className="text-body-md text-on-surface-variant italic mt-1 line-clamp-1">
-              &ldquo;{review.originStory}&rdquo;
+            <p className="flex items-start gap-1 text-label-md text-on-surface-variant italic mt-1 line-clamp-1">
+              <span className="material-symbols-outlined text-[14px] not-italic shrink-0 mt-0.5">
+                auto_stories
+              </span>
+              {review.originStory}
             </p>
           )}
-          <p className="font-body-md text-body-md text-on-surface line-clamp-2 mt-2 italic opacity-90 leading-snug">
-            &ldquo;{review.body}&rdquo;
+          <p className="font-body-md text-body-md text-on-surface line-clamp-2 mt-2 pt-2 border-t border-outline-variant/30 leading-snug">
+            {review.body}
           </p>
           <TagRow tags={review.tags} />
           <ExcerptPreview reviewId={review.id} excerpts={review.excerpts} visibility={review.visibility} book={book ? { title: book.title, author: book.author } : undefined} />
@@ -221,11 +224,14 @@ export function ReviewCard({
         <p className="text-body-md text-on-surface font-bold mb-1">{review.shortReview}</p>
       )}
       {review.originStory && (
-        <p className="text-body-md text-on-surface-variant italic mb-1">
-          &ldquo;{review.originStory}&rdquo;
+        <p className="flex items-start gap-1 text-label-md text-on-surface-variant italic mb-1">
+          <span className="material-symbols-outlined text-[14px] not-italic shrink-0 mt-0.5">
+            auto_stories
+          </span>
+          {review.originStory}
         </p>
       )}
-      <p className="text-body-md text-on-surface-variant leading-relaxed line-clamp-3">
+      <p className="text-body-md text-on-surface-variant leading-relaxed line-clamp-3 pt-2 border-t border-outline-variant/30">
         {review.body}
       </p>
       <TagRow tags={review.tags} />
