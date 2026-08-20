@@ -138,6 +138,8 @@ export default async function BookDetailPage({ params }: BookDetailPageProps) {
             </div>
             <CommunityReviewList
               bookIsbn13={book.isbn13}
+              bookTitle={book.title}
+              bookAuthor={book.author}
               reviews={reviews}
               isLoggedIn={!!currentUserId}
               currentUserId={currentUserId}

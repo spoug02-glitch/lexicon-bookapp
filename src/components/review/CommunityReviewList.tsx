@@ -25,6 +25,8 @@ export interface CommunityReview {
 
 interface CommunityReviewListProps {
   bookIsbn13: string;
+  bookTitle: string;
+  bookAuthor: string | null;
   reviews: CommunityReview[]; // 좋아요 많은 순, 동률이면 최신순으로 이미 정렬돼 전달됨
   isLoggedIn: boolean;
   currentUserId?: string;
@@ -36,6 +38,8 @@ type LikeState = { count: number; likedByMe: boolean };
 
 export function CommunityReviewList({
   bookIsbn13,
+  bookTitle,
+  bookAuthor,
   reviews,
   isLoggedIn,
   currentUserId,
@@ -120,6 +124,7 @@ export function CommunityReviewList({
                 : undefined
             }
             share
+            book={{ isbn13: bookIsbn13, title: bookTitle, author: bookAuthor, coverUrl: null }}
           />
         );
       })}

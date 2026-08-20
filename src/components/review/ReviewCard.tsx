@@ -4,6 +4,7 @@ import { BookCover } from "@/components/book/BookCover";
 import { ChannelBadge } from "@/components/review/ChannelBadge";
 import { StarRating } from "@/components/review/StarRating";
 import { ShareButton } from "@/components/review/ShareButton";
+import { ExcerptShareTrigger } from "@/components/review/ExcerptShareTrigger";
 
 interface ReviewCardReview {
   id: string;
@@ -66,21 +67,42 @@ function ExcerptPreview({
   reviewId,
   excerpts,
   visibility,
+  book,
 }: {
   reviewId: string;
   excerpts: ReviewCardReview["excerpts"];
   visibility: "PUBLIC" | "PRIVATE";
+  book?: { title: string; author: string | null };
 }) {
   if (excerpts.length === 0) return null;
   const shown = excerpts.slice(0, 2);
   const remaining = excerpts.length - shown.length;
+  // 발췌 이미지/텍스트 공유는 공유 카드 API가 공개 리뷰만 렌더하므로, 비공개 리뷰나 책 정보가
+  // 없는 컨텍스트에서는 실패할 버튼을 보여주지 않는다.
+  const canShareExcerpt = visibility === "PUBLIC" && !!book;
 
   return (
     <div className="flex flex-col gap-1 mt-2">
       {shown.map((excerpt) => (
-        <p key={excerpt.id} className="text-body-md text-on-surface-variant italic border-l-2 border-outline-variant/40 pl-2">
-          &ldquo;<span>{excerpt.quote}</span>&rdquo;
-          {excerpt.pageLabel && <span className="not-italic text-label-md ml-1">({excerpt.pageLabel})</span>}
+        <p
+          key={excerpt.id}
+          className="flex items-start justify-between gap-2 text-body-md text-on-surface-variant italic border-l-2 border-outline-variant/40 pl-2"
+        >
+          <span className="min-w-0">
+            &ldquo;<span>{excerpt.quote}</span>&rdquo;
+            {excerpt.pageLabel && <span className="not-italic text-label-md ml-1">({excerpt.pageLabel})</span>}
+          </span>
+          {canShareExcerpt && book && (
+            <ExcerptShareTrigger
+              excerpt={{
+                excerptId: excerpt.id,
+                quote: excerpt.quote,
+                pageLabel: excerpt.pageLabel,
+                bookTitle: book.title,
+                author: book.author,
+              }}
+            />
+          )}
         </p>
       ))}
       {remaining > 0 && visibility === "PUBLIC" && (
@@ -155,7 +177,7 @@ export function ReviewCard({
             &ldquo;{review.body}&rdquo;
           </p>
           <TagRow tags={review.tags} />
-          <ExcerptPreview reviewId={review.id} excerpts={review.excerpts} visibility={review.visibility} />
+          <ExcerptPreview reviewId={review.id} excerpts={review.excerpts} visibility={review.visibility} book={book ? { title: book.title, author: book.author } : undefined} />
         </div>
       </div>
     );
@@ -207,7 +229,7 @@ export function ReviewCard({
         {review.body}
       </p>
       <TagRow tags={review.tags} />
-      <ExcerptPreview reviewId={review.id} excerpts={review.excerpts} visibility={review.visibility} />
+      <ExcerptPreview reviewId={review.id} excerpts={review.excerpts} visibility={review.visibility} book={book ? { title: book.title, author: book.author } : undefined} />
       {likes && (
         <button
           type="button"

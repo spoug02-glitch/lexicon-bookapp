@@ -2,6 +2,7 @@ import type { ReadingChannel } from "@prisma/client";
 import { BookCover } from "@/components/book/BookCover";
 import { ChannelBadge } from "@/components/review/ChannelBadge";
 import { StarRating } from "@/components/review/StarRating";
+import { ExcerptShareTrigger } from "@/components/review/ExcerptShareTrigger";
 
 interface ShareReviewCardProps {
   book: { isbn13: string; title: string; author: string | null; coverUrl: string | null };
@@ -45,19 +46,30 @@ export function ShareReviewCard({ book, review }: ShareReviewCardProps) {
           {review.excerpts.map((excerpt) => (
             <blockquote
               key={excerpt.id}
-              className="border-l-2 border-outline-variant/40 pl-3 text-body-md text-on-surface"
+              className="flex items-start justify-between gap-2 border-l-2 border-outline-variant/40 pl-3 text-body-md text-on-surface"
             >
-              &ldquo;{excerpt.quote}&rdquo;
-              {excerpt.pageLabel && (
-                <span className="block text-label-md text-on-surface-variant mt-1">
-                  {excerpt.pageLabel}
-                </span>
-              )}
-              {excerpt.comment && (
-                <span className="block text-label-md text-on-surface-variant mt-1">
-                  {excerpt.comment}
-                </span>
-              )}
+              <div className="min-w-0">
+                &ldquo;{excerpt.quote}&rdquo;
+                {excerpt.pageLabel && (
+                  <span className="block text-label-md text-on-surface-variant mt-1">
+                    {excerpt.pageLabel}
+                  </span>
+                )}
+                {excerpt.comment && (
+                  <span className="block text-label-md text-on-surface-variant mt-1">
+                    {excerpt.comment}
+                  </span>
+                )}
+              </div>
+              <ExcerptShareTrigger
+                excerpt={{
+                  excerptId: excerpt.id,
+                  quote: excerpt.quote,
+                  pageLabel: excerpt.pageLabel,
+                  bookTitle: book.title,
+                  author: book.author,
+                }}
+              />
             </blockquote>
           ))}
         </div>
