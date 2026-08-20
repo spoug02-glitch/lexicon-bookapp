@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { auth } from "@/lib/auth";
+import { LogoMark } from "@/components/brand/Logo";
 
 interface HeaderProps {
   title: string;
@@ -22,7 +23,7 @@ export async function Header({ title, variant = "default", backHref = "/" }: Hea
               <span className="material-symbols-outlined">arrow_back</span>
             </Link>
           ) : (
-            <span className="material-symbols-outlined text-primary text-[28px]">menu_book</span>
+            <LogoMark size={28} />
           )}
           <h1 className="font-title-lg text-title-lg text-primary">{title}</h1>
         </div>
