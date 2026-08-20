@@ -57,3 +57,11 @@ next-env.d.ts
 
 .vercel
 .env*
+
+# Capacitor Android — machine-local SDK path and build output, never commit
+/android/local.properties
+/android/build/
+/android/app/build/
+/android/.gradle/
+/android/capacitor-cordova-android-plugins/build/
+/resources/icon-preview.png

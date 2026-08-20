@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "899254978831",
+    "project_id": "p-bookyeol",
+    "storage_bucket": "p-bookyeol.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:899254978831:android:8bd8b2808c8658f653167a",
+        "android_client_info": {
+          "package_name": "kr.chaekgyeol.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUfjzriEtbpEF7o0bK7UDuMUwxHbyijfM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
