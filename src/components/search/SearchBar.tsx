@@ -23,21 +23,21 @@ export function SearchBar({ defaultValue = "" }: SearchBarProps) {
       onSubmit={handleSubmit}
       className="relative w-full h-12 bg-surface-container rounded-full flex items-center px-4 gap-3 focus-within:ring-2 focus-within:ring-primary focus-within:bg-surface transition-all shadow-sm"
     >
-      <span className="material-symbols-outlined text-on-surface-variant">search</span>
+      <button
+        type="submit"
+        aria-label="검색"
+        className="text-on-surface-variant flex items-center justify-center"
+      >
+        <span className="material-symbols-outlined">search</span>
+      </button>
       <input
         className="flex-1 bg-transparent border-none outline-none text-body-lg text-on-surface placeholder:text-on-surface-variant/70"
         placeholder="[예시 검색어]"
         value={value}
         onChange={(e) => setValue(e.target.value)}
         type="text"
+        enterKeyHint="search"
       />
-      <button
-        type="submit"
-        aria-label="검색"
-        className="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center hover:bg-primary hover:text-on-primary transition-colors"
-      >
-        <span className="material-symbols-outlined text-[18px]">search</span>
-      </button>
     </form>
   );
 }
