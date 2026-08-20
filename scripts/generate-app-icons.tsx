@@ -21,7 +21,7 @@ function Mark({ scale, strokeColor }: { scale: number; strokeColor: string }) {
     <svg width={px} height={px} viewBox="0 0 48 48" style={{ display: "flex" }}>
       <path d={LOGO_SPINE_PATH} fill={strokeColor} />
       {LOGO_GRAIN_LINES.map((d) => (
-        <path key={d} d={d} stroke={strokeColor} strokeWidth={2.4} strokeLinecap="round" fill="none" />
+        <path key={d} d={d} stroke={strokeColor} strokeWidth={4} strokeLinecap="round" fill="none" />
       ))}
       <path d={LOGO_FOLDED_PAGE_PATH} fill={SAGE} />
       <circle cx={LOGO_DOT.cx} cy={LOGO_DOT.cy} r={LOGO_DOT.r} fill={strokeColor} />

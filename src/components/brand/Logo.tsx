@@ -22,7 +22,7 @@ export function LogoMark({ size = 40, className }: LogoMarkProps) {
       <path d={LOGO_SPINE_PATH} fill="var(--color-primary)" />
       {/* 책의 결 — 페이지가 살짝 펼쳐진 가로선 3개 */}
       {LOGO_GRAIN_LINES.map((d) => (
-        <path key={d} d={d} stroke="var(--color-primary)" strokeWidth="2.4" strokeLinecap="round" />
+        <path key={d} d={d} stroke="var(--color-primary)" strokeWidth="4" strokeLinecap="round" />
       ))}
       {/* 접힌 페이지 — P의 볼(bowl), 세이지그린 */}
       <path d={LOGO_FOLDED_PAGE_PATH} fill="var(--color-brand-sage)" />
