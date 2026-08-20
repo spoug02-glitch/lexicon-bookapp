@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
+import { BackButtonHandler } from "@/components/native/BackButtonHandler";
 import "./globals.css";
 
 // 셀프 호스팅: Pretendard는 Google Fonts에 없어 next/font/local로 가변 폰트를 직접 번들.
@@ -28,6 +29,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="ko" className={`${pretendard.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col bg-background font-body-md text-on-background">
+        <BackButtonHandler />
         {children}
       </body>
     </html>
